@@ -7,20 +7,17 @@ use App\Http\Controllers\Controller;
 class AdminController extends Controller
 {
 
- public function __construct()
+  public function __construct()
     {
-        $this->middleware('auth');
-        // $this->middleware('admin');
+      $this->middleware('auth');
+      // $this->middleware('IsAdmin');
 
-        // $this->middleware('role:ROLE_ADMIN');
-        // $this->middleware('role:IsAdmin');
-
+      // $this->middleware('role:ROLE_ADMIN');
+      // $this->middleware('role:IsAdmin');
     }
 
- public function index()
-    {
-    	
-    return view('admin.index');
-
-    }
+  public function index()
+   {
+     return view('admin.index');
+   }
 }

@@ -23,18 +23,7 @@ class RegistrationController extends Controller
     		'password' => 'required|confirmed|max:15'
 
     	]);
-    	// $user = User::create(request(['name','email','password']));
-    	// auth()->login($user);
-    	// return redirect()->('home');
-
-
-
-
-
-
-
-   $data = request(['name','email','password']);
-
+    	$data = request(['name','email','password']);
       $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -43,7 +32,6 @@ class RegistrationController extends Controller
 
 
   	 auth()->login($user);
-     // \Mail::to($user)->send(new Welcome($user));
    		return redirect()->home();
 
 

@@ -13,16 +13,16 @@ class IsDashboardAccessible
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next,$role)
-    {
-      if (! $request->User()->isAdmin($role)) {
-          // dd($request->User()->isAdmin($role));
-          // return $next($request);
-            return redirect('/');
-      } else {
-          // return redirect('/');
-             return $next($request);
+//     public function handle($request, Closure $next,$role)
+//     {
+//       if (! $request->User()->isAdmin($role)) {
+//           // dd($request->User()->isAdmin($role));
+//           // return $next($request);
+//             return redirect('/');
+//       } else {
+//           // return redirect('/');
+//              return $next($request);
 
-        }
-    }
-}
+//         }
+//     }
+// }

@@ -6,45 +6,45 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
+use App\Http\Requests\UserForm;
+
 
 use Illuminate\Support\Facades\Hash;
 
 class StaffController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
-     public function __construct()
-     {
+    // public function __construct(){
+    //   $this->middleware('IsAdmin');
+ 
+    // }
 
-        $this middleware('IsDashboardAccessible');
-     }
-
-
-public function index(Request $request)
+   public function index(Request $request)
     {
-        if($request->User()->isAdmin('admin')) {
-            return view('admin.staff.create');
-        } else {
-            return redirect('/');
-        }
+      if ($request->User()->isAdmin('admin')) {
+            $users = User::paginate(15);
+             return view('admin.staff.index', compact('users'));
+         } else {
+               return redirect('/');
+         }
     }
+
+    
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+   public function create(UserForm $request)
     {
-        //  if($request->User()->isAdmin('admin')) {
-        //     return view('admin.staff.create');
-        // } else {
-        //     return redirect('/');
-        // }
+      if ($request->User()->isAdmin('admin')) {
+            return view('admin.staff.create');
+        } else {
+            return redirect('/');
+        }
+
     }
 
     /**
@@ -53,30 +53,23 @@ public function index(Request $request)
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, User $user)
-    {
-        $this->validate(request(),[
-
-           'name' => 'required',
-
-           'email' => 'required|email',
-
-           'password' => 'required|confirmed',
-
-
-        ]);
-
+   public function store(UserForm $request, User $user)
+     {
+    // $this->validate(request(),[
+   //   'name' => 'required',
+  //    'email' => 'required|email',
+  //    'password' => 'required|confirmed',
+   // ]);
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $role = Role::find($request->roles);
         $user->save();
-         $role->users()->attach($user);  
-
-        
-
- }
+        $role->users()->attach($user);  
+        return redirect()->route('staff.index');
+         // return back();
+     }
 
     /**
      * Display the specified resource.
@@ -84,8 +77,9 @@ public function index(Request $request)
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+   public function show(Request $request ,$id)
     {
+
     
     }
 
@@ -95,10 +89,15 @@ public function index(Request $request)
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
+   public function edit(Request $request , User $user ,$id)
+     {
+    // if ($request->User()->isAdmin('admin')) {
+     //  return view('admin.staff.edit', compact('user', 'id'));
+      // } else {
+    //     return redirect('/');
+      // }
+        return view('admin.staff.edit', compact('user', 'id'));
+     }
 
     /**
      * Update the specified resource in storage.
@@ -107,9 +106,26 @@ public function index(Request $request)
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+   public function update($id ,Request $request,User $user)
     {
-        //
+      $this->validate($request,[
+        'name'=>'required',
+        'email'=>'required',
+        'password'=>'required|confirmed',
+       ]);
+
+        $user = User::find($id); 
+        $user->update($request->all());
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $role = Role::find($request->roles);
+        $user->save();
+        $role->users()->attach($user);  
+        $user->update($request->all());
+            return redirect()->route('staff.index');
+
+        
     }
 
     /**
@@ -118,8 +134,15 @@ public function index(Request $request)
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+   public function destroy($id)
     {
-        //
+      $User = User::find($id);
+      $User->delete();
+       return redirect()->route('staff.index');
     }
+    
 }
+
+
+
+

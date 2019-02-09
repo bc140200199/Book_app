@@ -9,92 +9,59 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
-  <div class="col-md-4">
-    <h1>Register</h1>
-
-    <form method="POST" action="/user/register">
-      
+<div class="col-md-4">
+  <h1>Register</h1>
+   <form method="POST" action="/user/register">
     {{ csrf_field() }}
 
-    <div class="form-group">
+     <div class="form-group">
+       <label for="name">Name:</label>
+       <input type="text" class="form-control" id="name" name="name" required>
+     </div>
 
-      <label for="name">Name:</label>
+     <div class="form-group">
+       <label for="email">Email:</label>
+       <input type="text" class="form-control" id="email" name="email" required>
+     </div>
 
-      <input type="text" class="form-control" id="name" name="name" required>
-
-    </div>
-
-    <div class="form-group">
-
-      <label for="email">Email:</label>
-
-      <input type="text" class="form-control" id="email" name="email" required>
-      
-    </div>
-    <div class="form-group">
-    <label for="role">Role</label>
-      <select name="role" class="form-control" required>
+     <div class="form-group">
+       <label for="role">Role</label>
+       <select name="role" class="form-control" required>
         <option value="">None</option>
         <option value="moderator">Moderator</option>
         <option value="publisher">Publisher</option>
         <option value="user">User</option>
-      </select>
+       </select>
      </div>
+
+     <div class="form-group">
+       <label for="password">Password:</label>
+       <input type="password" class="form-control" id="password" name="password" required>
+     </div>
+
+     <div class="form-group">
+       <label for="password_confirmation"> Confirm Password</label>
+       <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+     </div>
+
     <div class="form-group">
-
-      <label for="password">Password:</label>
-
-      <input type="password" class="form-control" id="password" name="password" required>
-      
+       <button type="submit" class="btn btn-primary btn btn-block">Register</button>
     </div>
 
     <div class="form-group">
-      <label for="password_confirmation"> Confirm Password</label>
-      <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
-    </div>
-    <div class="form-group">
-      
-      <button type="submit" class="btn btn-primary btn btn-block">Register</button>
-
-    </div>
-
-    <div class="form-group">
-      
       @if(count($errors))
-
-    <div class="form-group">
-      <div class="alert alert-danger">
-
-        <ul>
-
-          @foreach($errors->all() as $error)
-
-          <li> {{ $error }}</li>
-
-          @endforeach
-
-        </ul>
-
-      </div>
-      </div>
-    @endif
-
+        <div class="form-group">
+          <div class="alert alert-danger">
+            <ul>
+              @foreach($errors->all() as $error)
+                <li> {{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+        </div>
+      @endif
     </div>
-
-
-
-
-
-    </form>
-
-
-
-
-
-
-  </div>
-
-
-
+   </form>
+</div>
 </body>
 </html>
