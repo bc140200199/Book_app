@@ -35,13 +35,6 @@ class UserForm extends FormRequest
 
         // ]);
 
-        // $user = new User;
-        // $user->name = $request->name;
-        // $user->email = $request->email;
-        // $user->password = Hash::make($request->password);
-        // $role = Role::find($request->roles);
-        // $user->save();
-        //  $role->users()->attach($user);  
-        // ];
+        
     }
 }
