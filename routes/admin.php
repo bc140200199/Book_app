@@ -22,8 +22,10 @@ Route::get('/logout','Admin\SessionController@destroy');
 
 
 
-// Route::resource('staff', 'Admin\StaffController');
-Route::resource('staff', 'StaffController');
+Route::resource('staff', 'Admin\StaffController');
+
+
+Route::resource('publisher', 'Admin\PublisherController');
 
 });
 

@@ -5,6 +5,9 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use \App\Role;
+use \App\PhoneNumbers;
+use \App\PublisherInfo;
+use \App\Addresses;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -93,22 +96,39 @@ class User extends Authenticatable
  //  }
  //  return false;
 // }
-public function isAdmin($role)
-{
-  if ($this->roles()->where('name', 'admin')->first()) {
+  public function isAdmin($role)
+  {
+    if ($this->roles()->where('name', 'admin')->first()) {
     return true;
   }
-  return false;
-}
+    return false;
+  }
 
 
-public function isModerator($role)
-{
-  if ($this->roles()->where('name', 'moderator')->take(2)) {
+  public function isModerator($role)
+  {
+    if ($this->roles()->where('name', 'moderator')->take(2)) {
     return true;
   }
-  return false;
-}
+    return false;
+  }
+
+
+
+  public function publishersInfo()
+  {
+    return $this->hasOne(PublishersInfo::class);
+  }
+
+  public function addresses()
+  {
+    return $this->hasMany(Addresses::class);
+  }
+
+  public function phoneNumbers()
+  {
+    return $this->hasOne(PhoneNumbers::class);
+  }
 
 }
 

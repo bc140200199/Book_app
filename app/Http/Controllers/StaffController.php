@@ -26,7 +26,7 @@ class StaffController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-  public function create(UserForm $request)
+  public function create(Request $request)
    {
      if ($request->User()->isAdmin('admin')) {
          return view('admin.staff.create');
@@ -40,13 +40,13 @@ class StaffController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-  public function store(UserForm $request, User $user)
+  public function store(Request $request, User $user)
     {
-   // $this->validate(request(),[
-  //    'name' => 'required',
-  //    'email' => 'required|email',
-  //    'password' => 'required|confirmed',
-     // ]);
+   $this->validate(request(),[
+     'name' => 'required',
+     'email' => 'required|email',
+     'password' => 'required|confirmed',
+     ]);
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
