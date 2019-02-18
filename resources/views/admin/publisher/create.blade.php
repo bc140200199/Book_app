@@ -18,8 +18,8 @@
         <input type="text" class="form-control" id="name" name="publisher_name" required>
      </div>
      <div class="form-group">
-        <label for="Number">Phone Number:</label>
-        <input type="tel" class="form-control" name="Number" required>
+        <label for="number">Phone Number:</label>
+        <input type="tel" class="form-control" name="number" required>
      </div>
       <div class="form-group">
         <label for="opening_time">opening Time:</label>

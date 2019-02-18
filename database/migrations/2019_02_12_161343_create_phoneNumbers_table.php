@@ -13,11 +13,11 @@ class CreatePhoneNumbersTable extends Migration
      */
     public function up()
     {
-          Schema::create('phoneNumbers', function (Blueprint $table) {
+          Schema::create('phone_numbers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('Number');
+            $table->string('number');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -30,7 +30,7 @@ class CreatePhoneNumbersTable extends Migration
      */
     public function down()
     {
-          Schema::dropIfExists('phoneNumbers');
+        Schema::dropIfExists('phone_numbers');
 
     }
 }

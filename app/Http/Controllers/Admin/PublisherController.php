@@ -21,8 +21,8 @@ class PublisherController extends Controller
      */
     public function index(Request $request)
     {
-            // $users = User::paginate(15);
-            //  return view('admin.publisher.create', compact('users'));
+        $users = User::paginate(15);
+         return view('admin.publisher.index', compact('users'));
     }
 
     /**
@@ -60,7 +60,7 @@ class PublisherController extends Controller
         // 'contact_person' => 'required',
         'contact_person' => 'required',
         'publisher_name' => 'required',
-        'Number'=> 'required',
+        'number'=> 'required',
         'opening_time'=> 'required',
         'closing_time'=> 'required',
         'street_1'=> 'required',
@@ -73,62 +73,42 @@ class PublisherController extends Controller
     $data = $request->only('name','email','password');
     // dd($data);
      $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            "name" => $data['name'],
+            "email" => $data['email'],
+            "password" => bcrypt($data['password']),
         ]);
      // dd($user);
-        $user_id = $user->id;
-
-    $details = $request->only('user_id','contact_person','publisher_name','opening_time', 'closing_time');
-          dd($details);
+        $user_id = $user->id;  
+        // dd($user_id);
+    $details = $request->only('contact_person','publisher_name','opening_time', 'closing_time');
+          // dd($details);
 
       PublisherInfo::create([
-            'user_id' => $details[$user_id = $user->id],
-
-            'contact_person' => $details['contact_person'],
-            'publisher_name' => $details['publisher_name'],
-            'opening_time' =>  $details['opening_time'],
-            'closing_time' => $details['closing_time'],
+            "user_id" => $user_id,
+            "contact_person" => $details['contact_person'],
+            "publisher_name" => $details['publisher_name'],
+            "opening_time" =>  $details['opening_time'],
+            "closing_time" => $details['closing_time'],
         ]);
       // dd($details);
 
     $addresses = $request->only('street_1','street_2','state', 'country_name');
       Address::create([
-            'street_1' => $addresses['street_1'],
-            'street_2' => $addresses['street_2'],
-            'state' =>  $addresses['state'],
-            'country_name' => $addresses['country_name'],
+            "user_id" => $user_id,
+            "street_1" => $addresses['street_1'],
+            "street_2" => $addresses['street_2'],
+            "state" =>  $addresses['state'],
+            "country_name" => $addresses['country_name'],
         ]);
 
-    $numbers = $request->only('PhoneNumber');
+    $numbers = $request->only('number');
       PhoneNumber::create([
-            'PhoneNumber' => $numbers['PhoneNumber'],
-        ]);
-
-    // $details = new PublisherInfo;
-    //     $details->contact_person = $request->contact_person;
-    //     $details->publisher_name = $request->publisher_name;
-    //     $details->opening_time = $request->opening_time;
-    //     $details->closing_time = $request->closing_time;
-    //     $details->save();
-
-
-
-    // $address = new Address;
-    //     $address->street_1 = $request->street_1;
-    //     $address->street_2 = $request->street_2;
-    //     $address->state    =$request->state;
-    //     $address->country_name  =$request->country_name;
-    //     $address->save();
-
-    // $number = new PhoneNumber;
-    //     $number->Number = $request->Number;
-    //     $number->save();
-
-    $role = Role::find($request->roles);
+             "user_id" => $user_id,
+             "number" => $numbers['number'],
+        ]); 
+        $role = Role::where('name', 'publisher')->first();
         $user->save();
-        $role->users()->attach($user);  
+        $user->roles()->attach($role);
         return redirect()->route('publisher.index');
 
 

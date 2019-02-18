@@ -5,9 +5,9 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use \App\Role;
-use \App\PhoneNumbers;
+use \App\PhoneNumber;
 use \App\PublisherInfo;
-use \App\Addresses;
+use \App\Address;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -112,7 +112,13 @@ class User extends Authenticatable
   }
     return false;
   }
-
+   public function isPublisher($role)
+  {
+    if ($this->roles()->where('name', 'publisher')->take(3)) {
+    return true;
+  }
+    return false;
+  }
 
 
   public function publishersInfo()

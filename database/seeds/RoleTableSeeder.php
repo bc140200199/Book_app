@@ -21,5 +21,11 @@ class RoleTableSeeder extends Seeder
     	$role_moderator->description= 'm';
     	$role_moderator->save();
 
+
+        $role_publisher = new Role();
+        $role_publisher->name = 'publisher';
+        $role_publisher->description = 'publisher can upload their books on this website';
+        $role_publisher->save();
+
     }
 }

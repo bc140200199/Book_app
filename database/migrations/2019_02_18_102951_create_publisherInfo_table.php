@@ -13,7 +13,7 @@ class CreatePublisherInfoTable extends Migration
      */
     public function up()
     {
-        Schema::create('publisherInfo', function (Blueprint $table) {
+        Schema::create('publisher_info', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
@@ -33,6 +33,6 @@ class CreatePublisherInfoTable extends Migration
      */
     public function down()
     {
-       Schema::dropIfExists('publisherInfo');
+       Schema::dropIfExists('publisher_info');
     }
 }
