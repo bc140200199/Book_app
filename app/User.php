@@ -8,6 +8,7 @@ use \App\Role;
 use \App\PhoneNumber;
 use \App\PublisherInfo;
 use \App\Address;
+use App\Book;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -96,7 +97,7 @@ class User extends Authenticatable
  //  }
  //  return false;
 // }
-  public function isAdmin($role)
+  public function isAdmin()
   {
     if ($this->roles()->where('name', 'admin')->first()) {
     return true;
@@ -105,16 +106,16 @@ class User extends Authenticatable
   }
 
 
-  public function isModerator($role)
+  public function isModerator()
   {
-    if ($this->roles()->where('name', 'moderator')->take(2)) {
+    if ($this->roles()->where('name', 'moderator')->first()) {
     return true;
   }
     return false;
   }
-   public function isPublisher($role)
+   public function isPublisher()
   {
-    if ($this->roles()->where('name', 'publisher')->take(3)) {
+    if ($this->roles()->where('name', 'publisher')->first()) {
     return true;
   }
     return false;
@@ -134,6 +135,11 @@ class User extends Authenticatable
   public function phoneNumbers()
   {
     return $this->hasOne(PhoneNumbers::class);
+  }
+
+  public function book()
+  {
+    return $this->hasMany(Book::class);
   }
 
 }

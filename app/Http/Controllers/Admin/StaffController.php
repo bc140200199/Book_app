@@ -20,7 +20,11 @@ class StaffController extends Controller
    public function index(Request $request)
     {
       if ($request->User()->isAdmin('admin')) {
-            $users = User::paginate(15);
+            $users = User::whereHas('roles', function ($query) {
+                    $query->where('name', '=', 'admin');
+                    $query->orWhere('name', '=', 'moderator');
+                })->get();
+        // dd($users);
              return view('admin.staff.index', compact('users'));
          } else {
                return redirect('/');
@@ -106,21 +110,30 @@ class StaffController extends Controller
      */
    public function update($id ,Request $request,User $user)
     {
-      $this->validate($request,[
-        'name'=>'required',
-        'email'=>'required',
-        'password'=>'required|confirmed',
-       ]);
-
         $user = User::find($id); 
-        $user->update($request->all());
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $role = Role::find($request->roles);
         $user->save();
-        $role->users()->attach($user);  
+        $role = Role::find($request->roles);
+        $role->users()->attach($user);
         $user->update($request->all());
+
+    
+// dd($user->update($request->all()));
+        // $user->save();
+        // $role->users()->attach($user);
+        // $user->update($request->all());
+
+                // $user->save();
+
+
+         // $user->update($request->all());
+         // $user = User::find($id); 
+         $role->update($request->all());
+         // dd($role);
+                 $user->save();
+
             return redirect()->route('staff.index');
 
         

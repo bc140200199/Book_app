@@ -91,6 +91,20 @@
 
         <li class="treeview">
           <a href="#">
+            <i class="fa fa-users"></i>
+            <span>Book</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/admin/book/create"><i class="fa fa-circle-o"></i> Publish Book</a></li>
+            <li><a href="/admin/book"><i class="fa fa-circle-o"></i>Books List</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
             <i class="fa fa-laptop"></i>
             <span>UI Eslements</span>
             <span class="pull-right-container">

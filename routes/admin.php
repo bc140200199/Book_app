@@ -27,6 +27,8 @@ Route::resource('staff', 'Admin\StaffController');
 
 Route::resource('publisher', 'Admin\PublisherController');
 
+Route::resource('/book','Admin\BookController');
+
 });
 
 

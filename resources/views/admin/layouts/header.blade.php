@@ -10,3 +10,4 @@
     @include('admin.layouts.nav');
 
   </header>
+  @yield('login')

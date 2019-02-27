@@ -15,6 +15,7 @@ class StaffController extends Controller
     {
       if($request->User()->isAdmin('admin')) {
         $users = User::paginate(15);
+      
          return view('admin.staff.index', compact('users'));
          } else {
            return redirect('/');

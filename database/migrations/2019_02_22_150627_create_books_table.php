@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePhoneNumbersTable extends Migration
+class CreateBooksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,20 @@ class CreatePhoneNumbersTable extends Migration
      */
     public function up()
     {
-          Schema::create('phone_numbers', function (Blueprint $table) {
+        Schema::create('books', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('number');
-            $table->rememberToken();
+            $table->string('description');
+            $table->string('category');
+            $table->string('language');
+            $table->string('author_name');
+            $table->string('weight');
+            $table->string('no_of_pages');
+            $table->string('price');
+            $table->string('upload_title_page');
+            $table->string('upload_softcopy');
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }
@@ -30,7 +38,6 @@ class CreatePhoneNumbersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('phone_numbers');
-
+        Schema::dropIfExists('books');
     }
 }

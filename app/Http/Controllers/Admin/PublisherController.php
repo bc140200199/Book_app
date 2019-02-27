@@ -21,8 +21,10 @@ class PublisherController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::paginate(15);
-         return view('admin.publisher.index', compact('users'));
+       $users = Role::where('name', 'publisher')->first()->users;
+       // dd($users);
+       return view('admin.publisher.index', compact('users'));
+
     }
 
     /**
@@ -137,7 +139,7 @@ class PublisherController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.publisher.edit', compact('id'));
     }
 
     /**
@@ -148,8 +150,12 @@ class PublisherController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+         $user = User::find($id); 
+         $user->update($request->all());
+
+        return redirect()->route('publisher.index');
+
     }
 
     /**
@@ -160,6 +166,8 @@ class PublisherController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $User = User::find($id);
+      $User->delete();
+       return redirect()->route('publisher.index');
     }
 }

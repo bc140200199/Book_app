@@ -1,11 +1,14 @@
-
 {{-- @extends('admin.layouts.master')
-@section('content') --}}
-{{-- <div class="col-md-4">
-  <h1>Create Publisher</h1>
-   <form action="{{route('publisher.store')}}" method="POST">
-      {{ csrf_field() }}
-     <div class="form-group">
+@section('content')
+
+
+<div class="col-md-4">
+  <h1>Edit Publisher</h1>
+   <form action="{{ route('publisher.update', [$id]) }}"method="POST">
+
+    {{ csrf_field() }}  
+    {{ method_field('PUT') }}
+ <div class="form-group">
         <label for="name">Name:</label>
         <input type="text" class="form-control" id="name" name="name" required>
      </div>
@@ -16,7 +19,7 @@
      <div class="form-group">
         <label for="publisher_name">Publisher Name:</label>
         <input type="text" class="form-control" id="name" name="publisher_name" required>
-     </div> 
+     </div>
      <div class="form-group">
         <label for="number">Phone Number:</label>
         <input type="tel" class="form-control" name="number" required>
@@ -44,7 +47,7 @@
       <div class="form-group">
         <label for="country_name">Country:</label>
         <input type="text" class="form-control" name="country_name" required>
-     </div> 
+     </div>
      <div class="form-group">
         <label for="email">Email:</label>
         <input type="text" class="form-control" id="email" name="email" required>
@@ -61,24 +64,26 @@
      </div>
 
      <div class="form-group">
-        <button type="submit" class="btn btn-primary btn btn-block">Create Publisher</button>
+        <button type="submit" class="btn btn-primary btn btn-block">Edit Publisher</button>
      </div>
+   
 
-     <div class="form-group">
+    <div class="form-group">
        @if(count($errors))
         <div class="form-group">
          <div class="alert alert-danger">
-          <ul>
-            @foreach($errors->all() as $error)
-             <li> {{ $error }}</li>
-            @endforeach
-          </ul>
+           <ul>
+             @foreach($errors->all() as $error)
+               <li> {{ $error }}</li>
+             @endforeach
+           </ul>
          </div>
         </div>
        @endif
-     </div>
+    </div>
    </form>
-</div> --}}
+</div>
+@endsection --}}
 
 @extends('admin.layouts.master')
 @section('content')
@@ -94,8 +99,9 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form method="POST" role="form" action="{{route('publisher.store')}}">
+            <form method="POST" role="form" action="{{ route('publisher.update', [$id]) }}">
                 {{ csrf_field() }}
+                {{ method_field('PUT') }}
               <div class="box-body">
                  <div class="form-group">
                   <label for="name">Name</label>
@@ -155,7 +161,7 @@
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Create Publisher</button>
+                <button type="submit" class="btn btn-primary">Edit Publisher</button>
               </div>
 
 

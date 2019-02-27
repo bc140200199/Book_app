@@ -16,7 +16,7 @@ class CreatePublisherInfoTable extends Migration
         Schema::create('publisher_info', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('contact_person');
             $table->string('publisher_name');
             $table->string('opening_time');

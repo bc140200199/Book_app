@@ -27,12 +27,9 @@ include('admin.php');
  
 Route::group(['prefix'=>'user'], function(){
 Route::get('/register', 'RegistrationController@create');
-
 Route::post('/register', 'RegistrationController@store');
-
-
-
 });
+
 
 // Auth::routes();
 
