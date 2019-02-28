@@ -1,11 +1,17 @@
 
 @extends('admin.layouts.master')
 @section('content')
-<div class="col-md-8">
-  <h1>Upload Book</h1>
-   <form action="{{route('book.store')}}" method="POST">
-      {{ csrf_field() }}
+<div class="content-wrapper">
+  <div class="row">
+    <div class="col-md-6">
 
+  <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Publish Book</h3>
+            </div>
+   <form role="form" action="{{route('book.store')}}" method="POST" >
+      {{ csrf_field() }}
+      <div class="box-body">
      <div class="form-group">
         <label for="description">Name:</label>
         <input type="text" class="form-control" name="description" required>
@@ -48,10 +54,10 @@
        <input type="checkbox" name="active" value="1"> Yes<br>
        <input type="checkbox" name="active" value="0"> No<br>
      </div>
-
-     <div class="form-group">
-        <button type="submit" class="btn btn-primary btn btn-block">Publish Book</button>
-     </div>
+   </div>
+       <div class="box-footer">
+          <button type="submit" class="btn btn-primary">Publish Book</button>
+      </div>
 
      <div class="form-group">
        @if(count($errors))
@@ -68,7 +74,9 @@
      </div>
    </form>
 </div>
-
+</div>
+</div>
+</div>
 
 
 @endsection

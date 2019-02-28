@@ -30,14 +30,14 @@
              <td>   
                <div class="btn-group">
                 <div class="action">
-                 <a href="{{ route('publisher.edit', $user->id)}}" class="btn btn-primary">Edit</a>
+                 <a href="{{ route('publisher.edit', $user->id)}}" class="btn btn-primary btn-block btn-flat">Edit</a>
                 </div>
                  &nbsp;
                 <form action="{{ route('publisher.destroy', $user->id ) }}" method="POST">
                    <input type="hidden" name="_method" value="DELETE">
                      {{ csrf_field() }}
                      {{method_field('DELETE')}}
-                   <button class="btn btn-danger delete">Delete</button>
+                   <button class="btn btn-danger delete btn-block btn-flat">Delete</button>
                 </form>
                </div>
              </td>
@@ -48,7 +48,7 @@
             <td colspan="3">No entries found.</td>
            </tr>
          @endforelse
-       </tbody>
+       {{-- </tbody> --}}
      </table>
     </div>
    </div>
